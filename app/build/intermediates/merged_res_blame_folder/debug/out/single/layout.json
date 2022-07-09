@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "G:\\Train Projects\\CapstoneProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "G:\\Train Projects\\CapstoneProject\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "G:\\Train Projects\\CapstoneProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_sign_up.xml",
+        "source": "G:\\Train Projects\\CapstoneProject\\app\\src\\main\\res\\layout\\fragment_sign_up.xml"
+    }
+]
