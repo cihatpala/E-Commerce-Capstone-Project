@@ -4,7 +4,7 @@
             "outputFile": "G:\\Train Projects\\CapstoneProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mr\\values-mr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\d79cd730aff89e16bbe6bbee05f6ceb1\\transformed\\core-1.7.0\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\76ec275f14304ae6057f327500b8a2c7\\transformed\\core-1.7.0\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\7920eda6105a2f98ed752479e57f8270\\transformed\\appcompat-1.4.2\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\9e64e8a13b21babcca080d2f47a31ea0\\transformed\\appcompat-1.4.2\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\7bc5034a983d2f219beefabd7614d0b8\\transformed\\navigation-ui-2.4.2\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\da156f4749572b4597b1caf297e943fb\\transformed\\navigation-ui-2.4.2\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\7f996de61f9de873d26e696e73480ed2\\transformed\\material-1.6.1\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\Cihat\\.gradle\\caches\\transforms-3\\48c2becaef56abb12fe6568b1a03e129\\transformed\\material-1.6.1\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

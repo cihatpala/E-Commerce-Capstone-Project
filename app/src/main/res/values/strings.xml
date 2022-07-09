@@ -10,4 +10,9 @@
     <string name="already_have_account">Already have an account?</string>
     <string name="sign_up_social_account">Or sign up with social account</string>
 
+    <string name="login">Login</string>
+    <string name="login_button">LOGIN</string>
+    <string name="forgot_password_text">Forgot your password?</string>
+    <string name="login_social_account">Or login with social account</string>
+
 </resources>

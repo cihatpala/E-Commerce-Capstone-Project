@@ -72,6 +72,10 @@
         "source": "G:\\Train Projects\\CapstoneProject\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_chevron.png"
     },
     {
+        "merged": "G:\\Train Projects\\CapstoneProject\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_login.xml.flat",
+        "source": "G:\\Train Projects\\CapstoneProject\\app\\src\\main\\res\\layout\\fragment_login.xml"
+    },
+    {
         "merged": "G:\\Train Projects\\CapstoneProject\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "G:\\Train Projects\\CapstoneProject\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
     },

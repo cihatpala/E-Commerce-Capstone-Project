@@ -22,6 +22,7 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/font/lobster_italic.xml" value="0.39010416666666664" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/font/lobster_regular.xml" value="0.39010416666666664" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.248" />
       </map>
@@ -36,7 +37,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.2" />
+        <option name="scale" value="0.18" />
       </ProjectState>
     </option>
   </component>

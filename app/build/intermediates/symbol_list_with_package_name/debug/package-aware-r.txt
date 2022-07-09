@@ -2640,11 +2640,13 @@ id action_container
 id action_context_bar
 id action_divider
 id action_image
+id action_loginFragment_to_signUpFragment
 id action_menu_divider
 id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_signUpFragment_to_loginFragment
 id action_text
 id actions
 id activity_chooser_view_content
@@ -2680,6 +2682,7 @@ id bounceEnd
 id bounceStart
 id btn_already_account
 id btn_facebook
+id btn_forgot_password
 id btn_google
 id btn_signup
 id buttonPanel
@@ -2847,6 +2850,8 @@ id linear
 id listMode
 id list_item
 id locale
+id loginFragment
+id login_area
 id ltr
 id mail_area
 id masked
@@ -3084,6 +3089,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_already_account
+id tv_login_social_acount
 id tv_mail
 id tv_name
 id tv_password
@@ -3220,6 +3226,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_login
 layout fragment_sign_up
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -3352,11 +3359,15 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string forgot_password_text
 string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
 string label
+string login
+string login_button
+string login_social_account
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
 string m3_ref_typeface_plain_medium

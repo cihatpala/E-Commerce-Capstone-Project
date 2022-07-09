@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -63,15 +65,23 @@ public class SignUpFragment extends Fragment implements TWListener {
                 }
             }
         });
+
+        binding.btnAlreadyAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = SignUpFragmentDirections.actionSignUpFragmentToLoginFragment();
+                Navigation.findNavController(view).navigate(action);
+
+            }
+        });
+
+        binding.chevron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
-
-
-
-
-
-
-
-
 
 
     private void watchTexts() {
