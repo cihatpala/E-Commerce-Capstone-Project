@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_red">#F01F0E</color>
     <color name="app_black">#222222</color>
+    <color name="splash_start">#C6E7ECE9</color>
+    <color name="splash_center">#511212</color>
+    <color name="splash_end">#F80E0E</color>
 </resources>

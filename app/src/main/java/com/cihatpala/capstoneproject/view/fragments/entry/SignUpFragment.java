@@ -1,4 +1,4 @@
-package com.cihatpala.capstoneproject.view.fragments;
+package com.cihatpala.capstoneproject.view.fragments.entry;
 
 import static com.cihatpala.capstoneproject.helper.Helper.isValidEmail;
 import static com.cihatpala.capstoneproject.helper.Helper.isValidPassword;
@@ -18,47 +18,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cihatpala.capstoneproject.activities.EntryActivity;
+import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.R;
-import com.cihatpala.capstoneproject.databinding.FragmentLoginBinding;
+import com.cihatpala.capstoneproject.databinding.FragmentSignUpBinding;
 
+public class SignUpFragment extends Fragment {
 
-public class LoginFragment extends Fragment {
-
-    FragmentLoginBinding binding;
-
+    FragmentSignUpBinding binding;
 
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, null, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, null, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        watchTexts();
         onClicks();
+        watchTexts();
     }
 
-
     private void onClicks() {
-
-        binding.chevron.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavDirections action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment();
-                Navigation.findNavController(view).navigate(action);
-            }
-        });
-
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isValidEmail(binding.etMail.getText())) {
@@ -70,24 +60,57 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        binding.btnForgotPassword.setOnClickListener(new View.OnClickListener() {
+        binding.btnAlreadyAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment();
+                NavDirections action = SignUpFragmentDirections.actionSignUpFragmentToLoginFragment();
                 Navigation.findNavController(view).navigate(action);
 
             }
         });
 
+        binding.chevron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getActivity() != null) {
+                    ((EntryActivity) getActivity()).onBackPressed();
+                }
+            }
+        });
     }
 
-
     private void watchTexts() {
+        //Watch Name
+        binding.etName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int len = charSequence.length();
+                if (len == 0) {
+                    binding.checkMarkName.setVisibility(View.INVISIBLE);
+                    binding.tvName.setVisibility(View.INVISIBLE);
+                } else if (len < 8) {
+                    binding.checkMarkName.setVisibility(View.VISIBLE);
+                    binding.tvName.setVisibility(View.VISIBLE);
+                    binding.checkMarkName.setBackgroundResource(R.drawable.ic_not_checked);
+                }
+                if (len >= 8) { //Db'de ilgili kullanıcı adının da olmaması şartlara eklenmeli.
+                    binding.checkMarkName.setBackgroundResource(R.drawable.ic_check_mark);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
         //Watch Mail
         binding.etMail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -108,7 +131,6 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
@@ -116,7 +138,6 @@ public class LoginFragment extends Fragment {
         binding.etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -138,8 +159,8 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
     }
+
 }

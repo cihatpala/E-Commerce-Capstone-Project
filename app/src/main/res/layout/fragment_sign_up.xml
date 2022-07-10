@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.fragments.SignUpFragment">
+    tools:context=".view.fragments.entry.SignUpFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

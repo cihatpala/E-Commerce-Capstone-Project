@@ -7,18 +7,19 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.cihatpala.capstoneproject.view.fragments.SignUpFragment"
+        android:name="com.cihatpala.capstoneproject.view.fragments.entry.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpToSaveState="false" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.cihatpala.capstoneproject.view.fragments.LoginFragment"
+        android:name="com.cihatpala.capstoneproject.view.fragments.entry.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -28,9 +29,9 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.cihatpala.capstoneproject.view.fragments.ForgotPasswordFragment"
+        android:name="com.cihatpala.capstoneproject.view.fragments.entry.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" >
+        tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
