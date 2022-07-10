@@ -7,6 +7,7 @@ import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
 import com.cihatpala.capstoneproject.databinding.ActivityMainBindingImpl;
+import com.cihatpala.capstoneproject.databinding.FragmentForgotPasswordBindingImpl;
 import com.cihatpala.capstoneproject.databinding.FragmentLoginBindingImpl;
 import com.cihatpala.capstoneproject.databinding.FragmentSignUpBindingImpl;
 import java.lang.IllegalArgumentException;
@@ -22,14 +23,17 @@ import java.util.List;
 public class DataBinderMapperImpl extends DataBinderMapper {
   private static final int LAYOUT_ACTIVITYMAIN = 1;
 
-  private static final int LAYOUT_FRAGMENTLOGIN = 2;
+  private static final int LAYOUT_FRAGMENTFORGOTPASSWORD = 2;
 
-  private static final int LAYOUT_FRAGMENTSIGNUP = 3;
+  private static final int LAYOUT_FRAGMENTLOGIN = 3;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(3);
+  private static final int LAYOUT_FRAGMENTSIGNUP = 4;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(4);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.cihatpala.capstoneproject.R.layout.activity_main, LAYOUT_ACTIVITYMAIN);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.cihatpala.capstoneproject.R.layout.fragment_forgot_password, LAYOUT_FRAGMENTFORGOTPASSWORD);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.cihatpala.capstoneproject.R.layout.fragment_login, LAYOUT_FRAGMENTLOGIN);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.cihatpala.capstoneproject.R.layout.fragment_sign_up, LAYOUT_FRAGMENTSIGNUP);
   }
@@ -48,6 +52,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new ActivityMainBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for activity_main is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTFORGOTPASSWORD: {
+          if ("layout/fragment_forgot_password_0".equals(tag)) {
+            return new FragmentForgotPasswordBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_forgot_password is invalid. Received: " + tag);
         }
         case  LAYOUT_FRAGMENTLOGIN: {
           if ("layout/fragment_login_0".equals(tag)) {
@@ -114,10 +124,11 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(3);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(4);
 
     static {
       sKeys.put("layout/activity_main_0", com.cihatpala.capstoneproject.R.layout.activity_main);
+      sKeys.put("layout/fragment_forgot_password_0", com.cihatpala.capstoneproject.R.layout.fragment_forgot_password);
       sKeys.put("layout/fragment_login_0", com.cihatpala.capstoneproject.R.layout.fragment_login);
       sKeys.put("layout/fragment_sign_up_0", com.cihatpala.capstoneproject.R.layout.fragment_sign_up);
     }

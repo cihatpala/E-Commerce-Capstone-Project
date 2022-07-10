@@ -15,4 +15,9 @@
     <string name="forgot_password_text">Forgot your password?</string>
     <string name="login_social_account">Or login with social account</string>
 
+    <string name="forgot_password">Forgor Password</string>
+    <string name="send">SEND</string>
+    <string name="forgot_mail_info">Please, enter your email address. You will receive a link to create a new password via email.</string>
+    <string name="forgot_mail_error">Not a valid email address. Should be your@email.com</string>
+
 </resources>

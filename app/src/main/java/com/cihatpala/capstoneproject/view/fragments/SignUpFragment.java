@@ -78,11 +78,12 @@ public class SignUpFragment extends Fragment implements TWListener {
         binding.chevron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (getActivity() != null) {
+                    ((MainActivity) getActivity()).onBackPressed();
+                }
             }
         });
     }
-
 
     private void watchTexts() {
         //Watch Name

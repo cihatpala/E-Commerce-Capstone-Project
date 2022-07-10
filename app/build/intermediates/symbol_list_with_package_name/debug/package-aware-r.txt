@@ -1248,6 +1248,7 @@ color accent_material_light
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color app_black
+color app_red
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -2639,7 +2640,9 @@ id action_bar_title
 id action_container
 id action_context_bar
 id action_divider
+id action_forgotPasswordFragment_to_loginFragment
 id action_image
+id action_loginFragment_to_forgotPasswordFragment
 id action_loginFragment_to_signUpFragment
 id action_menu_divider
 id action_menu_presenter
@@ -2684,6 +2687,8 @@ id btn_already_account
 id btn_facebook
 id btn_forgot_password
 id btn_google
+id btn_login
+id btn_send
 id btn_signup
 id buttonPanel
 id cache_measures
@@ -2798,6 +2803,8 @@ id fixed
 id flip
 id floating
 id forever
+id forgotPasswordFragment
+id forgot_area
 id fragmentContainerView
 id fragment_container_view_tag
 id frost
@@ -2854,6 +2861,7 @@ id loginFragment
 id login_area
 id ltr
 id mail_area
+id mail_info_area
 id masked
 id match_constraint
 id match_parent
@@ -3089,6 +3097,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_already_account
+id tv_forgot_err
+id tv_forgot_info
 id tv_login_social_acount
 id tv_mail
 id tv_name
@@ -3226,6 +3236,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_forgot_password
 layout fragment_login
 layout fragment_sign_up
 layout m3_alert_dialog
@@ -3359,6 +3370,9 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string forgot_mail_error
+string forgot_mail_info
+string forgot_password
 string forgot_password_text
 string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
@@ -3450,6 +3464,7 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
+string send
 string sign_up_social_account
 string signup
 string signup_btn

@@ -7,11 +7,14 @@ import androidx.core.view.WindowInsetsCompat;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.cihatpala.capstoneproject.callback.TWListener;
 import com.cihatpala.capstoneproject.databinding.ActivityMainBinding;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private TWListener twListener;
+    boolean doubleBackToExitPressedOnce = false;
     public final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,5 +65,24 @@ public class MainActivity extends AppCompatActivity {
                 ((EditText) twListener.getWatched()).addTextChangedListener(textWatcher);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(MainActivity.this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 }
