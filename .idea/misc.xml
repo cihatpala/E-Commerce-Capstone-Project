@@ -6,6 +6,7 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/chevron.xml" value="0.248" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/custom_input.xml" value="0.2215" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/gradient_background.xml" value="0.2015" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/gradient_text_background.xml" value="0.187" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_another_entry.xml" value="0.282" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_bags.xml" value="0.2715" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_check_mark.xml" value="0.248" />
@@ -24,9 +25,9 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/font/lobster_italic.xml" value="0.39010416666666664" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/font/lobster_regular.xml" value="0.39010416666666664" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_entry.xml" value="0.25729166666666664" />
-        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_forgot_password.xml" value="0.33" />
-        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_login.xml" value="0.18" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.248" />
       </map>

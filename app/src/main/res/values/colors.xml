@@ -12,4 +12,8 @@
     <color name="splash_start">#C6E7ECE9</color>
     <color name="splash_center">#511212</color>
     <color name="splash_end">#F80E0E</color>
+
+    <color name="splash_start_text">#B81B1B</color>
+    <color name="splash_center_text">#320707</color>
+    <color name="splash_end_text">#F80E0E</color>
 </resources>

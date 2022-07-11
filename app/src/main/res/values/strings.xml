@@ -9,6 +9,8 @@
     <string name="password">Password</string>
     <string name="already_have_account">Already have an account?</string>
     <string name="sign_up_social_account">Or sign up with social account</string>
+    <string name="chat_pala">Chatpala</string>
+    <string name="avm">shop</string>
 
     <string name="login">Login</string>
     <string name="login_button">LOGIN</string>
@@ -19,5 +21,13 @@
     <string name="send">SEND</string>
     <string name="forgot_mail_info">Please, enter your email address. You will receive a link to create a new password via email.</string>
     <string name="forgot_mail_error">Not a valid email address. Should be your@email.com</string>
+
+
+
+    <string name="facebook_app_id">627488304972911</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
+
 
 </resources>

@@ -3,6 +3,7 @@ package com.cihatpala.capstoneproject.view.fragments.entry;
 import static com.cihatpala.capstoneproject.helper.Helper.isValidEmail;
 import static com.cihatpala.capstoneproject.helper.Helper.isValidPassword;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,23 +21,68 @@ import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.databinding.FragmentLoginBinding;
+import com.cihatpala.capstoneproject.view.fragments.CollectiveFragment;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends CollectiveFragment {
 
     FragmentLoginBinding binding;
+    CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private static final String EMAIL = "email";
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, null, false);
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        //Home'a atmalı
+                        System.out.println("facebook login success");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        //durmalı
+                        System.out.println("facebook login onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        //durmalı
+                        System.out.println("facebook login onError");
+                    }
+                });
         return binding.getRoot();
     }
 
@@ -58,15 +104,41 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
+
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isValidEmail(binding.etMail.getText())) {
-                    System.out.println("düzgün mail giriniz.");
+                boolean isValidAllAreas = isValidAreas((FragmentLoginBinding) binding);
+                String email = binding.etMail.getText().toString();
+                String password = binding.etPassword.getText().toString();
+                if (!email.equals("") && !password.equals("") && isValidAllAreas) {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            toastMessage("Kullanıcı Oluşturuldu!");
+//                            NavDirections action = LoginFragmentDirections.actionLoginFragmentToHomeFragment();
+//                            Navigation.findNavController(view).navigate(action);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            toastMessage("Giriş Başarısız: " + e.getLocalizedMessage());
+                        }
+                    });
+                } else if (!isValidAllAreas) {
+                    toastMessage("Lütfen alanları doğru şekilde doldurunuz.");
                 } else {
-                    System.out.println("mail düzgün");
-                    binding.checkMarkMail.setVisibility(View.VISIBLE);
+                    //boş
+                    toastMessage("Lütfen alanları boş bırakmayınız");
                 }
+            }
+        });
+
+        binding.btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
             }
         });
 
@@ -100,8 +172,10 @@ public class LoginFragment extends Fragment {
                     binding.checkMarkMail.setVisibility(View.VISIBLE);
                     binding.tvMail.setVisibility(View.VISIBLE);
                     binding.checkMarkMail.setBackgroundResource(R.drawable.ic_not_checked);
+                    binding.checkMarkMail.setTag(R.drawable.ic_not_checked);
                 } else { //Db'de ilgili mailin olmaması şartı da eklenmeli
                     binding.checkMarkMail.setBackgroundResource(R.drawable.ic_check_mark);
+                    binding.checkMarkMail.setTag(R.drawable.ic_check_mark);
                 }
 
             }
@@ -129,8 +203,10 @@ public class LoginFragment extends Fragment {
                     binding.checkMarkPassword.setVisibility(View.VISIBLE);
                     binding.tvPassword.setVisibility(View.VISIBLE);
                     binding.checkMarkPassword.setBackgroundResource(R.drawable.ic_not_checked);
+                    binding.checkMarkPassword.setTag(R.drawable.ic_not_checked);
                 } else {
                     binding.checkMarkPassword.setBackgroundResource(R.drawable.ic_check_mark);
+                    binding.checkMarkPassword.setTag(R.drawable.ic_check_mark);
                 }
 
             }

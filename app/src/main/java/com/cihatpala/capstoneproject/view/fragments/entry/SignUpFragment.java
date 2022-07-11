@@ -17,20 +17,46 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cihatpala.capstoneproject.activities.EntryActivity;
 import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.databinding.FragmentSignUpBinding;
+import com.cihatpala.capstoneproject.view.fragments.CollectiveFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpFragment extends Fragment {
+public class SignUpFragment extends CollectiveFragment {
 
     FragmentSignUpBinding binding;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    //User is sign in
+//                    toastMessage("Zaten giriş yapıldı");
+//                    NavDirections action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment();
+//                    Navigation.findNavController(requireView()).navigate(action);
+//                } else {
+//                    //user is sign out
+//                    toastMessage("Çıkış yapıldı");
+//                }
+//
+//            }
+//        };
     }
 
     @Override
@@ -48,14 +74,35 @@ public class SignUpFragment extends Fragment {
     }
 
     private void onClicks() {
+
         binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isValidEmail(binding.etMail.getText())) {
-                    System.out.println("düzgün mail giriniz.");
+                String email = binding.etMail.getText().toString();
+                String name = binding.etName.getText().toString();
+                String password = binding.etPassword.getText().toString();
+
+                boolean isValidAllAreas = isValidAreas((FragmentSignUpBinding) binding);
+
+                if (!name.equals("") && !email.equals("") && !password.equals("") && isValidAllAreas) {
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            toastMessage("Kullanıcı Oluşturuldu!");
+//                            NavDirections action = LoginFragmentDirections.actionLoginFragmentToHomeFragment();
+//                            Navigation.findNavController(view).navigate(action);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            toastMessage("Kullanıcı Eklenemedi: " + e.getLocalizedMessage());
+                        }
+                    });
+                } else if (!isValidAllAreas) {
+                    toastMessage("Lütfen alanları doğru şekilde doldurunuz.");
                 } else {
-                    System.out.println("mail düzgün");
-                    binding.checkMarkMail.setVisibility(View.VISIBLE);
+                    //boş
+                    toastMessage("Lütfen alanları boş bırakmayınız");
                 }
             }
         });
@@ -96,9 +143,11 @@ public class SignUpFragment extends Fragment {
                     binding.checkMarkName.setVisibility(View.VISIBLE);
                     binding.tvName.setVisibility(View.VISIBLE);
                     binding.checkMarkName.setBackgroundResource(R.drawable.ic_not_checked);
+                    binding.checkMarkName.setTag(R.drawable.ic_not_checked);
                 }
                 if (len >= 8) { //Db'de ilgili kullanıcı adının da olmaması şartlara eklenmeli.
                     binding.checkMarkName.setBackgroundResource(R.drawable.ic_check_mark);
+                    binding.checkMarkName.setTag(R.drawable.ic_check_mark);
                 }
             }
 
@@ -123,8 +172,10 @@ public class SignUpFragment extends Fragment {
                     binding.checkMarkMail.setVisibility(View.VISIBLE);
                     binding.tvMail.setVisibility(View.VISIBLE);
                     binding.checkMarkMail.setBackgroundResource(R.drawable.ic_not_checked);
+                    binding.checkMarkMail.setTag(R.drawable.ic_not_checked);
                 } else { //Db'de ilgili mailin olmaması şartı da eklenmeli
                     binding.checkMarkMail.setBackgroundResource(R.drawable.ic_check_mark);
+                    binding.checkMarkMail.setTag(R.drawable.ic_check_mark);
                 }
 
             }
@@ -150,8 +201,10 @@ public class SignUpFragment extends Fragment {
                     binding.checkMarkPassword.setVisibility(View.VISIBLE);
                     binding.tvPassword.setVisibility(View.VISIBLE);
                     binding.checkMarkPassword.setBackgroundResource(R.drawable.ic_not_checked);
+                    binding.checkMarkPassword.setTag(R.drawable.ic_not_checked);
                 } else {
                     binding.checkMarkPassword.setBackgroundResource(R.drawable.ic_check_mark);
+                    binding.checkMarkPassword.setTag(R.drawable.ic_check_mark);
                 }
 
             }
@@ -162,5 +215,6 @@ public class SignUpFragment extends Fragment {
             }
         });
     }
+
 
 }
