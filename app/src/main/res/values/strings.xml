@@ -34,11 +34,17 @@
     <string name="favorites">Favorites</string>
     <string name="profile">Profile</string>
 
-    <!-- Main Page Texts-->
+    <!-- Market Texts-->
     <string name="main_page_fragment">MainPage Fragment</string>
     <string name="shop_fragment">Shop Fragment</string>
     <string name="bag_fragment">Bag Fragment</string>
     <string name="favorites_fragment">Favorites Fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
+    <string name="check">Check</string>
+    <string name="fashion_sale">Fashion Sale</string>
+    <string name="txt_new">New</string>
+    <string name="txt_ad">You’ve never seen it before!</string>
+    <string name="view_all">View all</string>
+    <string name="product_old_price"><strike>21$</strike></string>
 
 </resources>

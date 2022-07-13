@@ -14,10 +14,15 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_check_mark.xml" value="0.248" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_chevron.xml" value="0.248" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_facebook.xml" value="0.282" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_favorite_circle.xml" value="0.1895" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_favorite_heart.xml" value="0.1895" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_google.xml" value="0.282" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2125" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_nav_bar_rectangle.xml" value="0.2125" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_not_checked.xml" value="0.2135" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_product_favorite.xml" value="0.1895" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_product_gift.xml" value="0.1895" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_star.xml" value="0.1895" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/ic_tabbar.xml" value="0.2125" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/rectangle.xml" value="0.248" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/drawable/rectangle_3.xml" value="0.248" />
@@ -43,10 +48,11 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_favorites.xml" value="0.26856884057971014" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_forgot_password.xml" value="0.33" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_login.xml" value="0.2" />
-        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_main_page.xml" value="0.26856884057971014" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_main_page.xml" value="0.2805391743892165" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_profile.xml" value="0.26856884057971014" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_shop.xml" value="0.26856884057971014" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_sale.xml" value="0.3938356164383562" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.248" />
       </map>
@@ -57,5 +63,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>
