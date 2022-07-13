@@ -20,16 +20,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
+        binding.sphashScreen.setClickable(true);
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent goToEntry = new Intent(MainActivity.this, EntryActivity.class);
+                Intent goToEntry = new Intent(MainActivity.this, MarketActivity.class);
                 startActivity(goToEntry);
                 finish();
             }
-        }, 2000);
+        }, 1000);
     }
 
 

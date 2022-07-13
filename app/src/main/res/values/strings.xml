@@ -23,11 +23,22 @@
     <string name="forgot_mail_error">Not a valid email address. Should be your@email.com</string>
 
 
-
     <string name="facebook_app_id">627488304972911</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
 
+    <!-- nav bar string-->
+    <string name="home">Home</string>
+    <string name="shop">Shop</string>
+    <string name="bag">Bag</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
 
+    <!-- Main Page Texts-->
+    <string name="main_page_fragment">MainPage Fragment</string>
+    <string name="shop_fragment">Shop Fragment</string>
+    <string name="bag_fragment">Bag Fragment</string>
+    <string name="favorites_fragment">Favorites Fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
 
 </resources>
