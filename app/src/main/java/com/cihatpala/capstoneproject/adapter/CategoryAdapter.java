@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cihatpala.capstoneproject.databinding.ItemCategoryBinding;
-import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
 import com.cihatpala.capstoneproject.holder.CategoryHolder;
 import com.cihatpala.capstoneproject.model.Category;
 

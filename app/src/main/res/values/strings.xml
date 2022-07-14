@@ -51,6 +51,15 @@
     <string name="btn_all_items">View All Items</string>
     <string name="choose_category">Choose category</string>
     <string name="category_item">Category Item</string>
+    <string name="bag_item_name">Pullover</string>
+    <string name="bag_item_color">Color:</string>
+    <string name="bag_item_color_black">Black</string>
+    <string name="bag_item_size">Size:</string>
+    <string name="bag_item_size_L">L</string>
+    <string name="bag_item_count">1</string>
+    <string name="bag_item_count_down">—</string>
+    <string name="bag_item_count_up">+</string>
+    <string name="bag_item_total_amount">51$</string>
 
 
 </resources>
