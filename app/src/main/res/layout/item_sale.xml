@@ -7,7 +7,9 @@
         android:id="@+id/product_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

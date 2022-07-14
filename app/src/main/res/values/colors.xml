@@ -10,6 +10,8 @@
     <color name="app_red">#F01F0E</color>
     <color name="app_black">#222222</color>
     <color name="app_gray">#9B9B9B</color>
+    <color name="app_white">#F9F9F9</color>
+    <color name="app_background_white">#F5F5F5</color>
     <color name="splash_start">#C6E7ECE9</color>
     <color name="splash_center">#511212</color>
     <color name="splash_end">#F80E0E</color>

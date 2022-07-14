@@ -47,4 +47,10 @@
     <string name="view_all">View all</string>
     <string name="product_old_price"><strike>21$</strike></string>
 
+    <string name="categories">Categories</string>
+    <string name="btn_all_items">View All Items</string>
+    <string name="choose_category">Choose category</string>
+    <string name="category_item">Category Item</string>
+
+
 </resources>

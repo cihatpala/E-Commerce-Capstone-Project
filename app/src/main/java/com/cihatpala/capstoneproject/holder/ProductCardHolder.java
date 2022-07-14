@@ -15,7 +15,8 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Product product) {
-        binding.amountOld.setText("0$");
+        binding.amountOld.setText(product.amount);
+        binding.productBrandName.setText(product.brandName);
     }
 
 }
