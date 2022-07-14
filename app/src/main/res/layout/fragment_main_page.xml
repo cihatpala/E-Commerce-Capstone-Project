@@ -4,112 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.fragments.home.MainPageFragment">
 
-    <LinearLayout
-        android:id="@+id/ll_main_page"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F5F5F5"
-        android:orientation="vertical"
-        android:weightSum="100">
-
-        <FrameLayout
-            android:id="@+id/fashion_sale"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="60"
-            android:background="@drawable/fashion">
-
-            <TextView
-                android:id="@+id/tv_fashion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="14dp"
-                android:layout_marginBottom="100dp"
-                android:text="@string/fashion_sale"
-                android:textColor="@color/white"
-                android:textSize="48sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_fashion_check"
-                android:layout_width="160dp"
-                android:layout_height="36dp"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="14dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/rectangle_red"
-                android:text="@string/check"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-
-        </FrameLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/ll_main_page"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_height="match_parent"
             android:background="#F5F5F5"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/fashion_sale">
+            android:weightSum="100">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
+                android:id="@+id/fashion_sale"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="33dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp">
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:background="@drawable/fashion">
 
                 <TextView
-                    android:id="@+id/tv_new"
+                    android:id="@+id/tv_fashion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_new"
-                    android:textColor="@color/app_black"
-                    android:textSize="34sp"
-                    android:textStyle="bold"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginBottom="100dp"
+                    android:text="@string/fashion_sale"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
+                    android:textStyle="bold" />
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_fashion_check"
+                    android:layout_width="160dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/rectangle_red"
+                    android:text="@string/check"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_ad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_ad"
-                    android:textColor="@color/app_gray"
-                    android:textSize="11sp"
-                    android:textStyle="italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_new" />
 
-                <TextView
-                    android:id="@+id/tv_view_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="@string/view_all"
-                    android:textColor="@color/app_black"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_new"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            </FrameLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_mainPage"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal" />
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:background="#F5F5F5"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/fashion_sale">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_new"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_new"
+                        android:textColor="@color/app_black"
+                        android:textSize="34sp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_ad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_ad"
+                        android:textColor="@color/app_gray"
+                        android:textSize="11sp"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_new" />
+
+                    <TextView
+                        android:id="@+id/tv_view_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/view_all"
+                        android:textColor="@color/app_black"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_new"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_mainPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="horizontal" />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
+    </ScrollView>
 
 
-    </LinearLayout>
 </layout>

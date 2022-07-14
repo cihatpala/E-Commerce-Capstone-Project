@@ -5,9 +5,11 @@
     tools:context=".activities.MarketActivity">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="7">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -15,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_weight="0"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +27,7 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="5"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="@+id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +40,11 @@
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:background="@drawable/ic_tabbar"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="@+id/market_container">
 
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,7 +53,7 @@
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rectangle"
                 app:labelVisibilityMode="labeled"
@@ -72,6 +77,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>
