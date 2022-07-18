@@ -9,11 +9,16 @@ import android.view.View;
 
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.databinding.ActivityMainBinding;
+import com.cihatpala.capstoneproject.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
     Handler handler;
+    public static List<Product> productList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

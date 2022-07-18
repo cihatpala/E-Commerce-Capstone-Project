@@ -5,13 +5,41 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Product implements Serializable {
+    @SerializedName("id")
     public int id;
-    public String brandName;
-    public String amount;
+    @SerializedName("title")
+    public String title;
+    @SerializedName("price")
+    public String price;
+    @SerializedName("category")
+    public String category;
+    @SerializedName("description")
+    public String description;
+    @SerializedName("image")
+    public String image;
 
-    public Product(int id, String brandName, String amount) {
+    public Product() {
+
+    }
+
+    public Product(int id, String title, String price, String category, String description, String image) {
         this.id = id;
-        this.brandName = brandName;
-        this.amount = amount;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

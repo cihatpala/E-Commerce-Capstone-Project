@@ -66,5 +66,8 @@
     <string name="bag_total_amount_123">123$</string>
     <string name="check_out">Check Out</string>
 
+    <string name="new_product">NEW</string>
+    <string name="reduced_product">-20%</string>
+
 
 </resources>

@@ -31,6 +31,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ProductCardHolder holder, int position) {
+        System.out.println("productList.get(position) -> " + productList.get(position));
         holder.bind(productList.get(position));
     }
 

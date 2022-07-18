@@ -7,9 +7,9 @@
         android:id="@+id/product_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp">
+        android:paddingEnd="5dp"
+        android:paddingBottom="10dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -21,13 +21,27 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/new_product"
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_product_new"
+                android:clickable="false"
+                android:text="@string/new_product"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/reduced_product"
                 android:layout_width="40dp"
                 android:layout_height="24dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/ic_product_gift"
                 android:clickable="false"
-                android:text="-20%"
+                android:text="@string/reduced_product"
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 android:textStyle="normal" />
@@ -108,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="(qdawd)"
+                        android:text="(0)"
                         android:textColor="@color/app_gray"
                         android:textSize="10sp" />
                 </LinearLayout>
