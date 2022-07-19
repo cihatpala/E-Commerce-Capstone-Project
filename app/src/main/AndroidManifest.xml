@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CapstoneProject">
         <activity
+            android:name=".activities.ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MarketActivity"
             android:exported="false" />
         <activity

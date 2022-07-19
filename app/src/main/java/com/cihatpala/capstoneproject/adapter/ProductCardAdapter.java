@@ -17,9 +17,11 @@ import java.util.List;
 public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> {
 
     List<Product> productList;
+    Context context;
 
-    public ProductCardAdapter(List<Product> productList) {
+    public ProductCardAdapter(List<Product> productList,Context context) {
         this.productList = productList;
+        this.context = context;
     }
 
     @NonNull
@@ -32,7 +34,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> 
     @Override
     public void onBindViewHolder(@NonNull ProductCardHolder holder, int position) {
         System.out.println("productList.get(position) -> " + productList.get(position));
-        holder.bind(productList.get(position));
+        holder.bind(productList.get(position),context);
     }
 
     @Override

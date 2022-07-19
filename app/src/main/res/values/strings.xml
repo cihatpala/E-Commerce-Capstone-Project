@@ -69,5 +69,12 @@
     <string name="new_product">NEW</string>
     <string name="reduced_product">-20%</string>
 
+    <string name="detail_product_title">Short dress</string>
+    <string name="detail_product_brand">H&amp;M</string>
+    <string name="detail_mini_desc">Short black dress</string>
+    <string name="detail_full_desc">Short dress in soft cotton jersey with decorative buttons down the front and a wide, frill-trimmed square neckline with concealed elastication. Elasticated seam under the bust and short puff sleeves with a small frill trim.</string>
+    <string name="detail_product_amount">$19.99</string>
+    <string name="btn_add_cart">ADD TO CART</string>
+
 
 </resources>

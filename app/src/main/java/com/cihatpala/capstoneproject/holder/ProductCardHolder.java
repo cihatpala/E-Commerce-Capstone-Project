@@ -4,6 +4,8 @@ import static com.cihatpala.capstoneproject.helper.Helper.doubleFormat;
 import static java.lang.Double.parseDouble;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.View;
 
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cihatpala.capstoneproject.R;
+import com.cihatpala.capstoneproject.activities.ProductDetailActivity;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
 import com.cihatpala.capstoneproject.helper.Helper;
 import com.cihatpala.capstoneproject.model.Product;
@@ -25,7 +28,7 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
     }
 
     @SuppressLint("SetTextI18n")
-    public void bind(Product product) {
+    public void bind(Product product, Context context) {
         Glide.with(binding.productImage)
                 .load(product.image)
                 .into(binding.productImage);
@@ -39,7 +42,13 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
         binding.amountOld.setText(formattedPrice + "$")
         ;
         productStateSeperator(product);
-
+        binding.productCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailIntent = new Intent(context, ProductDetailActivity.class);
+                context.startActivity(detailIntent);
+            }
+        });
     }
 
     @SuppressLint("ResourceAsColor")

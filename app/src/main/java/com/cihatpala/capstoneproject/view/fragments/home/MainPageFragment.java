@@ -48,7 +48,7 @@ public class MainPageFragment extends Fragment {
     }
 
     private void processLiveData(List<Product> products) {
-        adapter = new ProductCardAdapter(products);
+        adapter = new ProductCardAdapter(products, getActivity());
         binding.rvMainPage.setLayoutManager(linearLayoutManager);
         binding.rvMainPage.setAdapter(adapter);
     }

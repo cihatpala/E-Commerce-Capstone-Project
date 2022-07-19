@@ -44,6 +44,7 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_entry.xml" value="0.25729166666666664" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_market.xml" value="0.33" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/activity_product_detail.xml" value="0.22" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/collective_activity.xml" value="0.26856884057971014" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_bag.xml" value="0.33" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_favorites.xml" value="0.26856884057971014" />
@@ -55,7 +56,8 @@
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_bag.xml" value="0.16" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_category.xml" value="0.3429454170957775" />
-        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_sale.xml" value="0.9" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_detail_product.xml" value="0.3307291666666667" />
+        <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/layout/item_sale.xml" value="0.5" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/menu/sample_menu.xml" value="0.25" />
         <entry key="..\:/Train Projects/CapstoneProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.248" />
