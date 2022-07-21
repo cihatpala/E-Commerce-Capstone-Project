@@ -4,9 +4,13 @@ import static com.cihatpala.capstoneproject.helper.Helper.doubleFormat;
 import static java.lang.Double.parseDouble;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Parcelable;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +21,9 @@ import com.cihatpala.capstoneproject.activities.ProductDetailActivity;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
 import com.cihatpala.capstoneproject.helper.Helper;
 import com.cihatpala.capstoneproject.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductCardHolder extends RecyclerView.ViewHolder {
 
@@ -46,7 +53,12 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 Intent detailIntent = new Intent(context, ProductDetailActivity.class);
-                context.startActivity(detailIntent);
+                ArrayList<String> images = imagesList(product.image);
+                detailIntent.putStringArrayListExtra("img", images);
+                Pair[] pairs = new Pair[1];
+                pairs[0] = Pair.create(binding.productImage, "image");
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, pairs);
+                context.startActivity(detailIntent, activityOptions.toBundle());
             }
         });
     }
@@ -71,6 +83,14 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
                 binding.amountOld.setPaintFlags(Paint.HINTING_OFF);
             }
         }
+    }
+
+    public ArrayList<String> imagesList(String image) {
+        ArrayList<String> galleryImages = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            galleryImages.add(image);
+        }
+        return galleryImages;
     }
 
 }
