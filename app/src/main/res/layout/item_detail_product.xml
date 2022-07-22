@@ -20,7 +20,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="15dp"
-                android:layout_weight="4">
+                android:layout_weight="70">
 
                 <ImageView
                     android:id="@+id/chevron"
@@ -54,12 +54,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <FrameLayout
+            <LinearLayout
                 android:id="@+id/images_area"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="60"
-                android:background="@drawable/fashion">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="10">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_product_images"
@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:transitionName="image" />
 
-            </FrameLayout>
+            </LinearLayout>
 
 
             <androidx.cardview.widget.CardView

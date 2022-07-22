@@ -1,5 +1,6 @@
 package com.cihatpala.capstoneproject.helper;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -32,5 +33,13 @@ public class Helper {
 
         return matcher.matches();
 
+    }
+
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 }

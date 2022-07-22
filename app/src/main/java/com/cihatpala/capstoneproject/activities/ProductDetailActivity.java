@@ -31,7 +31,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         imgList = getIntent().getStringArrayListExtra("img");
         System.out.println("imgList -> " + imgList);
         initGallery();
-
+        chevronPressed();
     }
 
     private void initGallery() {
@@ -39,5 +39,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.productItem.rvProductImages.setLayoutManager(linearLayoutManager);
         binding.productItem.rvProductImages.setAdapter(adapter);
+    }
+
+    private void chevronPressed() {
+        binding.productItem.chevron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBack();
+            }
+        });
+
+    }
+
+    public void onBack() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
