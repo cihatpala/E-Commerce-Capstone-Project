@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Toast;
 
 import com.cihatpala.capstoneproject.databinding.ActivityEntryBinding;
@@ -19,6 +20,9 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEntryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
 

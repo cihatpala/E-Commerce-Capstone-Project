@@ -4,6 +4,10 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.cihatpala.capstoneproject.model.request.GetTokenRequest;
+import com.cihatpala.capstoneproject.model.servicemodel.UserModel;
+import com.google.gson.Gson;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
@@ -41,5 +45,17 @@ public class Helper {
 
     public static int getScreenHeight() {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
+
+    public static String initGetTokenRequest(String name, String password) {
+        Gson gson = new Gson();
+
+        GetTokenRequest request = new GetTokenRequest();
+        UserModel userModel = new UserModel();
+        userModel.username = "johnd";
+        userModel.password = "m38rmF$";
+        request.body = userModel;
+        String json = gson.toJson(request);
+        return json;
     }
 }

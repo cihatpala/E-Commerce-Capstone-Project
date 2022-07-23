@@ -10,6 +10,7 @@ import android.view.View;
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.databinding.ActivityMainBinding;
 import com.cihatpala.capstoneproject.model.Product;
+import com.cihatpala.capstoneproject.room.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ActivityMainBinding binding;
     Handler handler;
     public static List<Product> productList = new ArrayList<>();
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
-        binding.sphashScreen.setClickable(true);
+//        binding.sphashScreen.setOnClickListener(this);
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent goToEntry = new Intent(MainActivity.this, MarketActivity.class);
+                Intent goToEntry = new Intent(MainActivity.this, EntryActivity.class);
                 startActivity(goToEntry);
                 finish();
             }
-        }, 1000);
+        }, 500);
     }
 
 

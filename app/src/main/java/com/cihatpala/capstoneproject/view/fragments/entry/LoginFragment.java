@@ -1,5 +1,6 @@
 package com.cihatpala.capstoneproject.view.fragments.entry;
 
+import static com.cihatpala.capstoneproject.helper.Helper.initGetTokenRequest;
 import static com.cihatpala.capstoneproject.helper.Helper.isValidEmail;
 import static com.cihatpala.capstoneproject.helper.Helper.isValidPassword;
 
@@ -9,8 +10,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,8 +22,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
+import com.cihatpala.capstoneproject.activities.EntryActivity;
+import com.cihatpala.capstoneproject.activities.MainActivity;
+import com.cihatpala.capstoneproject.activities.MarketActivity;
 import com.cihatpala.capstoneproject.databinding.FragmentLoginBinding;
+import com.cihatpala.capstoneproject.network.Services;
+import com.cihatpala.capstoneproject.room.dao.UserDao;
+import com.cihatpala.capstoneproject.room.db.UserDatabase;
+import com.cihatpala.capstoneproject.room.entity.User;
 import com.cihatpala.capstoneproject.view.fragments.CollectiveFragment;
+import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -31,22 +42,34 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONArray;
+
 import java.util.Arrays;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.Multipart;
 
 
 public class LoginFragment extends CollectiveFragment {
-
+    CommerceViewModel viewModel;
     FragmentLoginBinding binding;
     CallbackManager callbackManager;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String EMAIL = "email";
+    UserDatabase db;
+    UserDao userDao;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        viewModel = new ViewModelProvider(this).get(CommerceViewModel.class);
+        db = Room.databaseBuilder(getActivity().getApplicationContext(), UserDatabase.class, "users").allowMainThreadQueries().build();
+        userDao = db.userDao();
 
     }
 
@@ -111,19 +134,24 @@ public class LoginFragment extends CollectiveFragment {
                 String email = binding.etMail.getText().toString();
                 String password = binding.etPassword.getText().toString();
                 if (!email.equals("") && !password.equals("") && isValidAllAreas) {
-                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            toastMessage("Kullanıcı Oluşturuldu!");
-//                            NavDirections action = LoginFragmentDirections.actionLoginFragmentToHomeFragment();
-//                            Navigation.findNavController(view).navigate(action);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            toastMessage("Giriş Başarısız: " + e.getLocalizedMessage());
-                        }
-                    });
+                    if (email.equals("c@c.c") && password.equals("As1+")) {
+                        loginUserByService(email, password);
+                    } else {
+                        toastMessage("check the values");
+                    }
+//                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                        @Override
+//                        public void onSuccess(AuthResult authResult) {
+//                            toastMessage("Kullanıcı Oluşturuldu!");
+////                            NavDirections action = LoginFragmentDirections.actionLoginFragmentToHomeFragment();
+////                            Navigation.findNavController(view).navigate(action);
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            toastMessage("Giriş Başarısız: " + e.getLocalizedMessage());
+//                        }
+//                    });
                 } else if (!isValidAllAreas) {
                     toastMessage("Lütfen alanları doğru şekilde doldurunuz.");
                 } else {
@@ -145,10 +173,30 @@ public class LoginFragment extends CollectiveFragment {
             public void onClick(View view) {
                 NavDirections action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment();
                 Navigation.findNavController(view).navigate(action);
-
             }
         });
 
+    }
+
+    public void loginUserByService(String name, String password) {
+        viewModel.getToken(initGetTokenRequest(name, password));
+        viewModel.getUserToken().observe(getViewLifecycleOwner(), this::loginWithToken);
+    }
+
+    private void loginWithToken(User user) {
+        boolean isSave = saveLoginnedUser(user);
+        if (isSave) {
+            Intent goToEntry = new Intent(getActivity(), MarketActivity.class);
+            startActivity(goToEntry);
+            getActivity().finish();
+        }
+    }
+
+    private boolean saveLoginnedUser(User user) {
+        //TODO: Add token + name (email etc.) pass to user table
+        System.out.println("user -> " + user.toString());
+        userDao.insert(user);
+        return true;
     }
 
 
