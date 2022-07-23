@@ -2,7 +2,6 @@ package com.cihatpala.capstoneproject.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> 
     List<Product> productList;
     Context context;
 
-    public ProductCardAdapter(List<Product> productList,Context context) {
+    public ProductCardAdapter(List<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }
@@ -34,7 +33,7 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> 
     @Override
     public void onBindViewHolder(@NonNull ProductCardHolder holder, int position) {
         System.out.println("productList.get(position) -> " + productList.get(position));
-        holder.bind(productList.get(position),context);
+        holder.bind(productList.get(position), context);
     }
 
     @Override

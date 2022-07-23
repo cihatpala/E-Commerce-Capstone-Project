@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
@@ -103,7 +102,6 @@ public class LoginFragment extends CollectiveFragment {
                 Navigation.findNavController(view).navigate(action);
             }
         });
-
 
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {

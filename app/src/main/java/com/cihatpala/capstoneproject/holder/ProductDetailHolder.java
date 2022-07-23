@@ -4,8 +4,6 @@ import static com.cihatpala.capstoneproject.helper.Helper.getScreenHeight;
 import static com.cihatpala.capstoneproject.helper.Helper.getScreenWidth;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +25,7 @@ public class ProductDetailHolder extends RecyclerView.ViewHolder {
         setImagesByScreenSize(img);
     }
 
-    private void setImagesByScreenSize(String img) {
+    private void setImagesByScreenSize(String img) { //TODO: the size of the incoming image can also be included in the resizing
         int height = (getScreenHeight() / 100) * 53;
         int width = (getScreenWidth() / 100) * 75;
         ViewGroup.LayoutParams layoutParams = binding.imageItem.getLayoutParams();

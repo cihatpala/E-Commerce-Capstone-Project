@@ -1,7 +1,6 @@
 package com.cihatpala.capstoneproject.view.fragments.entry;
 
 import static com.cihatpala.capstoneproject.helper.Helper.isValidEmail;
-import static com.cihatpala.capstoneproject.helper.Helper.isValidPassword;
 
 import android.os.Bundle;
 

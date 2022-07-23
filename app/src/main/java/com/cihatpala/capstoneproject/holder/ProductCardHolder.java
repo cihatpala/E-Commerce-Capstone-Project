@@ -9,7 +9,6 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Parcelable;
 import android.util.Pair;
 import android.view.View;
 
@@ -19,11 +18,9 @@ import com.bumptech.glide.Glide;
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.activities.ProductDetailActivity;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
-import com.cihatpala.capstoneproject.helper.Helper;
 import com.cihatpala.capstoneproject.model.Product;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProductCardHolder extends RecyclerView.ViewHolder {
 

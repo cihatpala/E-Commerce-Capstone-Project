@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.databinding.FragmentFavoritesBinding;
-import com.cihatpala.capstoneproject.view.fragments.entry.LoginFragmentDirections;
-
 
 public class FavoritesFragment extends Fragment {
 
