@@ -6,11 +6,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cihatpala.capstoneproject.activities.MainActivity;
+import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.model.Product;
 import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
 import com.cihatpala.capstoneproject.network.BaseNetwork;
 import com.cihatpala.capstoneproject.network.Services;
 import com.cihatpala.capstoneproject.room.entity.User;
+import com.cihatpala.capstoneproject.utils.Common;
 
 import java.util.List;
 
@@ -51,13 +53,9 @@ public class CommerceViewModel extends ViewModel {
 
                     @Override
                     public void onNext(List<Product> products) {
-//                        System.out.println("getProducts onComplete products -> " + products);
+                        System.out.println("getProducts onComplete products -> " + products);
+                        addProductOnDb(products);
                         for (int i = 0; i < products.size(); i++) {
-//                            System.out.println(coinsResponseModels.get(i).toString());
-//                            System.out.println("product d->" + products.get(i).toString());
-//                            System.out.println("fixProductData d->" + fixProductData(products.get(i)));
-
-
                             MainActivity.productList.add(fixProductData(products.get(i)));
                             productList.postValue(MainActivity.productList);
                         }
@@ -140,5 +138,21 @@ public class CommerceViewModel extends ViewModel {
             fixedProduct.title = badProduct.title;
         }
         return fixedProduct;
+    }
+
+    private void addProductOnDb(List<Product> products) {
+        System.out.println("addProductOnDb product -> " + products);
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            ProductOnDB productOnDB = new ProductOnDB();
+            productOnDB.id = product.id;
+            productOnDB.title = product.title;
+            productOnDB.price = product.price;
+            productOnDB.category = product.category;
+            productOnDB.description = product.description;
+            productOnDB.image = product.image;
+            Common.productRepository.deleteToProduct(productOnDB);
+            Common.productRepository.insertToProduct(productOnDB);
+        }
     }
 }

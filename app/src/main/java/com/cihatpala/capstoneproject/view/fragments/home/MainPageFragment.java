@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.adapter.ProductCardAdapter;
+import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.databinding.FragmentMainPageBinding;
 import com.cihatpala.capstoneproject.model.Product;
 import com.cihatpala.capstoneproject.room.dao.FavoritesDao;
 import com.cihatpala.capstoneproject.room.db.FavoritesDatabase;
 import com.cihatpala.capstoneproject.room.db.UserDatabase;
+import com.cihatpala.capstoneproject.utils.Common;
 import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 
 import java.util.ArrayList;
