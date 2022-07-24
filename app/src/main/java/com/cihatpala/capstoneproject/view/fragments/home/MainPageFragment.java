@@ -1,6 +1,5 @@
 package com.cihatpala.capstoneproject.view.fragments.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -16,6 +15,9 @@ import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.adapter.ProductCardAdapter;
 import com.cihatpala.capstoneproject.databinding.FragmentMainPageBinding;
 import com.cihatpala.capstoneproject.model.Product;
+import com.cihatpala.capstoneproject.room.dao.FavoritesDao;
+import com.cihatpala.capstoneproject.room.db.FavoritesDatabase;
+import com.cihatpala.capstoneproject.room.db.UserDatabase;
 import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ public class MainPageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(CommerceViewModel.class);
-
     }
 
     @Override

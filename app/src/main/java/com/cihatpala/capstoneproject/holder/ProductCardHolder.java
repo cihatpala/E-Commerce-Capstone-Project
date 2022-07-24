@@ -13,26 +13,46 @@ import android.util.Pair;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.cihatpala.capstoneproject.R;
+import com.cihatpala.capstoneproject.activities.EntryActivity;
+import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.activities.ProductDetailActivity;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
 import com.cihatpala.capstoneproject.model.Product;
+import com.cihatpala.capstoneproject.room.dao.FavoritesDao;
+import com.cihatpala.capstoneproject.room.db.FavoritesDatabase;
+import com.cihatpala.capstoneproject.room.entity.Favorites;
 
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.exceptions.OnErrorNotImplementedException;
+import io.reactivex.schedulers.Schedulers;
 
 public class ProductCardHolder extends RecyclerView.ViewHolder {
 
     ItemSaleBinding binding;
+    FavoritesDao favoritesDao;
+    FavoritesDatabase db;
+    public int globalProductId;
+    public int currentPosition;
+    public Favorites globalFavorites = new Favorites();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public ProductCardHolder(ItemSaleBinding binding) {
+    public ProductCardHolder(ItemSaleBinding binding, Context context) {
         super(binding.getRoot());
         this.binding = binding;
+        db = Room.databaseBuilder(context, FavoritesDatabase.class, "favorites").allowMainThreadQueries().build();
+        favoritesDao = db.favoritesDao();
     }
 
     @SuppressLint("SetTextI18n")
-    public void bind(Product product, Context context) {
+    public void bind(Product product, Context context, int position) {
+        currentPosition = position;
         Glide.with(binding.productImage)
                 .load(product.image)
                 .into(binding.productImage);
@@ -58,6 +78,81 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
                 context.startActivity(detailIntent, activityOptions.toBundle());
             }
         });
+
+        binding.btnFavoriteCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("binding.btnFavoriteCircle clicked");
+                isFavorites(product);
+            }
+        });
+
+        binding.btnFavoriteHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("binding.btnFavoriteHeart clicked");
+                isFavorites(product);
+
+            }
+        });
+    }
+
+    private void isFavorites(Product product) {
+        globalProductId = product.id;
+        try {
+            compositeDisposable.add(favoritesDao.getFavoritesIsExists(globalProductId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::isExistsFavorite));
+        } catch (OnErrorNotImplementedException e) {
+            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
+        }
+    }
+
+    private void isExistsFavorite(Integer result) {
+        globalFavorites.favoriteItemId = globalProductId;
+        if (result != 0) {
+            System.out.println("isExistsFavorite is exists");
+            deleteFavorite();
+        } else {
+            System.out.println("isExistsFavorite is not exists");
+            addFavorite();
+        }
+    }
+
+    private void addFavorite() {
+        try {
+            compositeDisposable.add(favoritesDao.insert(globalFavorites)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::addedFavorite));
+        } catch (OnErrorNotImplementedException e) {
+            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
+        }
+    }
+
+    private void deleteFavorite() {
+        try {
+            compositeDisposable.add(favoritesDao.delete(globalFavorites)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::deletedFavorite));
+        } catch (OnErrorNotImplementedException e) {
+            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private void addedFavorite() {
+        System.out.println("added favorite item");
+        binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_full);
+        compositeDisposable.clear();
+    }
+
+    private void deletedFavorite() {
+        System.out.println("deleted favorite item");
+        binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_empty);
+        compositeDisposable.clear();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -89,5 +184,4 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
         }
         return galleryImages;
     }
-
 }

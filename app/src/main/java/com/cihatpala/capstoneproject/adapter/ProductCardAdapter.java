@@ -27,13 +27,13 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> 
     @Override
     public ProductCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemSaleBinding recyclerRowBinding = ItemSaleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ProductCardHolder(recyclerRowBinding);
+        return new ProductCardHolder(recyclerRowBinding, context);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductCardHolder holder, int position) {
         System.out.println("productList.get(position) -> " + productList.get(position));
-        holder.bind(productList.get(position), context);
+        holder.bind(productList.get(position), context, position);
     }
 
     @Override
