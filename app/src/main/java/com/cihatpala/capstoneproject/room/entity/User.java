@@ -14,9 +14,30 @@ public class User {
     @ColumnInfo(name = "user_name")
     public String name;
 
+    @NonNull
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(@NonNull String token) {
+        this.token = token;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public User(String token, String name) {
         this.token = token;
         this.name = name;
+    }
+
+    public User() {
+
     }
 
     @Override

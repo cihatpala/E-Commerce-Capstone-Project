@@ -45,7 +45,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONArray;
 
 import java.util.Arrays;
+import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.exceptions.OnErrorNotImplementedException;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -61,6 +67,7 @@ public class LoginFragment extends CollectiveFragment {
     private static final String EMAIL = "email";
     UserDatabase db;
     UserDao userDao;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Override
@@ -134,11 +141,8 @@ public class LoginFragment extends CollectiveFragment {
                 String email = binding.etMail.getText().toString();
                 String password = binding.etPassword.getText().toString();
                 if (!email.equals("") && !password.equals("") && isValidAllAreas) {
-                    if (email.equals("c@c.c") && password.equals("As1+")) {
-                        loginUserByService(email, password);
-                    } else {
-                        toastMessage("check the values");
-                    }
+//                    email.equals("c@c.c") && password.equals("As1+")
+                    loginUserByService(email, password);
 //                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 //                        @Override
 //                        public void onSuccess(AuthResult authResult) {
@@ -179,26 +183,57 @@ public class LoginFragment extends CollectiveFragment {
     }
 
     public void loginUserByService(String name, String password) {
-        viewModel.getToken(initGetTokenRequest(name, password));
-        viewModel.getUserToken().observe(getViewLifecycleOwner(), this::loginWithToken);
+        viewModel.getToken(initGetTokenRequest(name, password), name);
+        allUserNameControl(name);
+//        viewModel.getUserToken().observe(getViewLifecycleOwner(), this::saveLoginnedUser);
     }
 
-    private void loginWithToken(User user) {
-        boolean isSave = saveLoginnedUser(user);
-        if (isSave) {
-            Intent goToEntry = new Intent(getActivity(), MarketActivity.class);
-            startActivity(goToEntry);
-            getActivity().finish();
+    private void allUserNameControl(String name) {
+        try {
+            compositeDisposable.add(userDao.getNameIsExists(name)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::allUser));
+        } catch (OnErrorNotImplementedException e) {
+            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
         }
     }
 
-    private boolean saveLoginnedUser(User user) {
-        //TODO: Add token + name (email etc.) pass to user table
-        System.out.println("user -> " + user.toString());
-        userDao.insert(user);
-        return true;
+    private void allUser(Integer result) {
+        if (result != 0) {
+            System.out.println("allUser name is exists");
+            goToMarket();
+        } else {
+            System.out.println("allUser name is not exists");
+            viewModel.getUserToken().observe(getViewLifecycleOwner(), this::saveLoginnedUser);
+        }
     }
 
+    private void saveLoginnedUser(User user) {
+        //TODO: Add token + name (email etc.) pass to user table
+        System.out.println("user -> " + user.toString());
+        try {
+            compositeDisposable.add(userDao.insert(user)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::goToMarket));
+        } catch (OnErrorNotImplementedException e) {
+            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
+        }
+
+    }
+
+    private void goToMarket() {
+        Intent goToMarket = new Intent(getActivity(), MarketActivity.class);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(goToMarket);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+    }
 
     private void watchTexts() {
         //Watch Mail

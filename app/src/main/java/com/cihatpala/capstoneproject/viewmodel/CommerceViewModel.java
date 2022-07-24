@@ -1,11 +1,13 @@
 package com.cihatpala.capstoneproject.viewmodel;
 
+import static com.cihatpala.capstoneproject.helper.Helper.generateRandomToken;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.model.Product;
-import com.cihatpala.capstoneproject.model.request.GetTokenRequest;
+import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
 import com.cihatpala.capstoneproject.network.BaseNetwork;
 import com.cihatpala.capstoneproject.network.Services;
 import com.cihatpala.capstoneproject.room.entity.User;
@@ -16,7 +18,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,22 +76,27 @@ public class CommerceViewModel extends ViewModel {
                 });
     }
 
-    public void getToken(String request) {
+    public void getToken(String request, String name) {
         System.out.println("request -> " + request.toString());
         apiService = BaseNetwork.getClient().create(Services.class);
-        Call<String> call = apiService.postLogin(request);
-        call.enqueue(new Callback<String>() {
+        Call<GetTokenResponse> call = apiService.postLogin(request);
+        call.enqueue(new Callback<GetTokenResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<GetTokenResponse> call, Response<GetTokenResponse> response) {
                 System.out.println("getToken onComplete response -> " + response);
                 System.out.println("getToken onComplete request.body -> " + response.body());
-//                System.out.println("getToken onComplete request.body.username -> " + request.body.username);
-                User user = new User(response.body(), "asd");
+                User user = new User();
+                if (response.body() != null) {
+                    user.setToken(response.body().token);
+                } else {
+                    user.setToken(generateRandomToken(5));
+                }
+                user.setName(name);
                 getUserToken().postValue(user);
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<GetTokenResponse> call, Throwable t) {
                 System.out.println("getToken onFailure getLocalizedMessage -> " + t.getLocalizedMessage());
                 System.out.println("getToken onFailure getMessage-> " + t.getMessage());
 //                System.out.println("getToken onFailure request.body.username -> " + request.body.username);

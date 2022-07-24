@@ -1,7 +1,7 @@
 package com.cihatpala.capstoneproject.network;
 
 import com.cihatpala.capstoneproject.model.Product;
-import com.cihatpala.capstoneproject.model.request.GetTokenRequest;
+import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface Services {
     Observable<List<Product>> getAllProducts(@Query("limit") String query, @Query("sort") String sort); //returnProductList
 
     @POST("auth/login")
-    Call<String> postLogin(@Body String request); //returnProductList
+    Call<GetTokenResponse> postLogin(@Body String request); //returnProductList
 }

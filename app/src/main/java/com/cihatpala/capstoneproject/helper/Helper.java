@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,10 +53,20 @@ public class Helper {
 
         GetTokenRequest request = new GetTokenRequest();
         UserModel userModel = new UserModel();
-        userModel.username = "johnd";
-        userModel.password = "m38rmF$";
+        userModel.username = name;
+        userModel.password = password;
         request.body = userModel;
         String json = gson.toJson(request);
         return json;
+    }
+
+    public static String generateRandomToken(int len) {
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
+                + "lmnopqrstuvwxyz!@#$%&";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        return sb.toString();
     }
 }
