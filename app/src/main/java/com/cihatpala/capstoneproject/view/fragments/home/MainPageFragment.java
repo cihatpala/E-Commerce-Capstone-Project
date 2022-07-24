@@ -1,5 +1,6 @@
 package com.cihatpala.capstoneproject.view.fragments.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -53,4 +54,12 @@ public class MainPageFragment extends Fragment {
         binding.rvMainPage.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        System.out.println("MainPageFragment onResume");
+        super.onResume();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
 }
