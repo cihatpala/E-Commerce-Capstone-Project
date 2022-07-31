@@ -3,18 +3,13 @@ package com.cihatpala.capstoneproject.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.cihatpala.capstoneproject.R;
 import com.cihatpala.capstoneproject.adapter.ProductDetailAdapter;
 import com.cihatpala.capstoneproject.databinding.ActivityProductDetailBinding;
-import com.cihatpala.capstoneproject.databinding.ItemDetailProductBinding;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class ProductDetailActivity extends AppCompatActivity {
     ActivityProductDetailBinding binding;

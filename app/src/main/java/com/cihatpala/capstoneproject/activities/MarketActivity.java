@@ -14,12 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.cihatpala.capstoneproject.R;
-import com.cihatpala.capstoneproject.database.datasource.ProductRepository;
-import com.cihatpala.capstoneproject.database.local.ProductDataSource;
-import com.cihatpala.capstoneproject.database.local.ProductDatabase;
 import com.cihatpala.capstoneproject.databinding.ActivityMarketBinding;
-
-import com.cihatpala.capstoneproject.utils.Common;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -78,7 +73,6 @@ public class MarketActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        initDB();
     }
 
     @Override
@@ -92,7 +86,6 @@ public class MarketActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onBackPressed() {
         NavBackStackEntry navBackStackEntry = navController.getPreviousBackStackEntry();
@@ -104,10 +97,5 @@ public class MarketActivity extends AppCompatActivity {
         }
 
         super.onBackPressed();
-    }
-
-    private void initDB() {
-        Common.productDatabase = ProductDatabase.getInstance(this);
-        Common.productRepository = ProductRepository.getInstance(ProductDataSource.getInstance(Common.productDatabase.productDAO()));
     }
 }

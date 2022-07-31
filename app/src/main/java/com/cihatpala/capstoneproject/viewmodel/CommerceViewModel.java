@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
-import com.cihatpala.capstoneproject.model.Product;
+import com.cihatpala.capstoneproject.database.modelDB.UserOnDB;
 import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
 import com.cihatpala.capstoneproject.network.BaseNetwork;
 import com.cihatpala.capstoneproject.network.Services;
-import com.cihatpala.capstoneproject.room.entity.User;
 import com.cihatpala.capstoneproject.utils.Common;
 
 import java.util.List;
@@ -26,18 +25,23 @@ import retrofit2.Response;
 
 public class CommerceViewModel extends ViewModel {
     Services apiService;
-    private MutableLiveData<List<Product>> productList = new MutableLiveData<>();
-    private MutableLiveData<User> user = new MutableLiveData<>();
 
-    public MutableLiveData<List<Product>> getProductList() {
+    public void setProductList(MutableLiveData<List<ProductOnDB>> productList) {
+        this.productList = productList;
+    }
+
+    private MutableLiveData<List<ProductOnDB>> productList = new MutableLiveData<>();
+    private MutableLiveData<UserOnDB> user = new MutableLiveData<>();
+
+    public MutableLiveData<List<ProductOnDB>> getProductList() {
         return productList;
     }
 
-    public MutableLiveData<User> getUserToken() {
+    public MutableLiveData<UserOnDB> getUserToken() {
         return user;
     }
 
-    public void setUser(MutableLiveData<User> user) {
+    public void setUser(MutableLiveData<UserOnDB> user) {
         this.user = user;
     }
 
@@ -45,14 +49,14 @@ public class CommerceViewModel extends ViewModel {
         apiService = BaseNetwork.getClient().create(Services.class);
         apiService.getAllProducts(limit, sort).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Product>>() {
+                .subscribe(new Observer<List<ProductOnDB>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Product> products) {
+                    public void onNext(List<ProductOnDB> products) {
                         System.out.println("getProducts onComplete products -> " + products);
                         addProductOnDb(products);
                         for (int i = 0; i < products.size(); i++) {
@@ -83,7 +87,7 @@ public class CommerceViewModel extends ViewModel {
             public void onResponse(Call<GetTokenResponse> call, Response<GetTokenResponse> response) {
                 System.out.println("getToken onComplete response -> " + response);
                 System.out.println("getToken onComplete request.body -> " + response.body());
-                User user = new User();
+                UserOnDB user = new UserOnDB();
                 if (response.body() != null) {
                     user.setToken(response.body().token);
                 } else {
@@ -97,40 +101,12 @@ public class CommerceViewModel extends ViewModel {
             public void onFailure(Call<GetTokenResponse> call, Throwable t) {
                 System.out.println("getToken onFailure getLocalizedMessage -> " + t.getLocalizedMessage());
                 System.out.println("getToken onFailure getMessage-> " + t.getMessage());
-//                System.out.println("getToken onFailure request.body.username -> " + request.body.username);
             }
         });
-//        apiService = BaseNetwork.getClient().create(Services.class);
-//        apiService.postLogin(request).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<String>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(String userToken) {
-//                        System.out.println("getToken onComplete products -> " + user);
-//                        User user = new User(userToken, request.body.username);
-//                        getUserToken().postValue(user);
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        System.out.println("getToken onError");
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        System.out.println("getToken onComplete");
-//                    }
-//                });
     }
 
-    public Product fixProductData(Product badProduct) {
-        Product fixedProduct;
+    public ProductOnDB fixProductData(ProductOnDB badProduct) {
+        ProductOnDB fixedProduct;
         fixedProduct = badProduct;
         if (badProduct.title.length() > 20) {
             fixedProduct.title = badProduct.title.substring(0, 19) + "...";
@@ -140,10 +116,10 @@ public class CommerceViewModel extends ViewModel {
         return fixedProduct;
     }
 
-    private void addProductOnDb(List<Product> products) {
+    private void addProductOnDb(List<ProductOnDB> products) {
         System.out.println("addProductOnDb product -> " + products);
         for (int i = 0; i < products.size(); i++) {
-            Product product = products.get(i);
+            ProductOnDB product = products.get(i);
             ProductOnDB productOnDB = new ProductOnDB();
             productOnDB.id = product.id;
             productOnDB.title = product.title;

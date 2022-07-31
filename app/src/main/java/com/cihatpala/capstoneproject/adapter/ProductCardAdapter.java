@@ -7,18 +7,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
 import com.cihatpala.capstoneproject.holder.ProductCardHolder;
-import com.cihatpala.capstoneproject.model.Product;
 
 import java.util.List;
 
 public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardHolder> {
 
-    List<Product> productList;
+    List<ProductOnDB> productList;
     Context context;
 
-    public ProductCardAdapter(List<Product> productList, Context context) {
+    public ProductCardAdapter(List<ProductOnDB> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }

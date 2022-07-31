@@ -1,6 +1,6 @@
 package com.cihatpala.capstoneproject.network;
 
-import com.cihatpala.capstoneproject.model.Product;
+import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface Services {
     @GET("products")
-    Observable<List<Product>> getAllProducts(@Query("limit") String query, @Query("sort") String sort); //returnProductList
+    Observable<List<ProductOnDB>> getAllProducts(@Query("limit") String query, @Query("sort") String sort); //returnProductList
 
     @POST("auth/login")
     Call<GetTokenResponse> postLogin(@Body String request); //returnProductList

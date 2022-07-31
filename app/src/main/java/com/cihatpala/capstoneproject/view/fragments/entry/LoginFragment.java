@@ -13,7 +13,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.room.Room;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,14 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
-import com.cihatpala.capstoneproject.activities.EntryActivity;
-import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.activities.MarketActivity;
+import com.cihatpala.capstoneproject.database.modelDB.UserOnDB;
 import com.cihatpala.capstoneproject.databinding.FragmentLoginBinding;
-import com.cihatpala.capstoneproject.network.Services;
-import com.cihatpala.capstoneproject.room.dao.UserDao;
-import com.cihatpala.capstoneproject.room.db.UserDatabase;
-import com.cihatpala.capstoneproject.room.entity.User;
+import com.cihatpala.capstoneproject.utils.Common;
 import com.cihatpala.capstoneproject.view.fragments.CollectiveFragment;
 import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 import com.facebook.CallbackManager;
@@ -37,26 +32,14 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.json.JSONArray;
-
 import java.util.Arrays;
-import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.exceptions.OnErrorNotImplementedException;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.http.Body;
-import retrofit2.http.Multipart;
-
 
 public class LoginFragment extends CollectiveFragment {
     CommerceViewModel viewModel;
@@ -65,8 +48,6 @@ public class LoginFragment extends CollectiveFragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String EMAIL = "email";
-    UserDatabase db;
-    UserDao userDao;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
@@ -75,9 +56,6 @@ public class LoginFragment extends CollectiveFragment {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         viewModel = new ViewModelProvider(this).get(CommerceViewModel.class);
-        db = Room.databaseBuilder(getActivity().getApplicationContext(), UserDatabase.class, "users").allowMainThreadQueries().build();
-        userDao = db.userDao();
-
     }
 
 
@@ -190,7 +168,8 @@ public class LoginFragment extends CollectiveFragment {
 
     private void allUserNameControl(String name) {
         try {
-            compositeDisposable.add(userDao.getNameIsExists(name)
+
+            compositeDisposable.add(Common.userRepository.getNameIsExists(name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::allUser));
@@ -209,11 +188,11 @@ public class LoginFragment extends CollectiveFragment {
         }
     }
 
-    private void saveLoginnedUser(User user) {
+    private void saveLoginnedUser(UserOnDB user) {
         //TODO: Add token + name (email etc.) pass to user table
         System.out.println("user -> " + user.toString());
         try {
-            compositeDisposable.add(userDao.insert(user)
+            compositeDisposable.add(Common.userRepository.insert(user)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::goToMarket));

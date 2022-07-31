@@ -12,59 +12,54 @@ import android.graphics.Paint;
 import android.util.Pair;
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.cihatpala.capstoneproject.R;
-import com.cihatpala.capstoneproject.activities.EntryActivity;
-import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.activities.ProductDetailActivity;
+import com.cihatpala.capstoneproject.database.modelDB.FavoriteOnDB;
+import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.databinding.ItemSaleBinding;
-import com.cihatpala.capstoneproject.model.Product;
-import com.cihatpala.capstoneproject.room.dao.FavoritesDao;
-import com.cihatpala.capstoneproject.room.db.FavoritesDatabase;
-import com.cihatpala.capstoneproject.room.entity.Favorites;
+import com.cihatpala.capstoneproject.utils.Common;
+import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.exceptions.OnErrorNotImplementedException;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProductCardHolder extends RecyclerView.ViewHolder {
 
     ItemSaleBinding binding;
-    FavoritesDao favoritesDao;
-    FavoritesDatabase db;
-    public int globalProductId;
     public int currentPosition;
-    public Favorites globalFavorites = new Favorites();
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    CommerceViewModel viewModel;
 
     public ProductCardHolder(ItemSaleBinding binding, Context context) {
         super(binding.getRoot());
         this.binding = binding;
-        db = Room.databaseBuilder(context, FavoritesDatabase.class, "favorites").allowMainThreadQueries().build();
-        favoritesDao = db.favoritesDao();
+        viewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(CommerceViewModel.class);
     }
 
     @SuppressLint("SetTextI18n")
-    public void bind(Product product, Context context, int position) {
+    public void bind(ProductOnDB product, Context context, int position) {
         currentPosition = position;
+        loadFavoriteItem(position);
         Glide.with(binding.productImage)
                 .load(product.image)
                 .into(binding.productImage);
-//        binding.amountOld.setText(product.description);
         binding.productBrandName.setText(product.title);
         binding.productItemType.setText(product.category);
         System.out.println("product.title bind -> " + product.title);
         System.out.println("product.price bind -> " + product.price);
         double richPrice = parseDouble(product.price) + 10;
         String formattedPrice = doubleFormat(richPrice);
-        binding.amountOld.setText(formattedPrice + "$")
-        ;
+        binding.amountOld.setText(formattedPrice + "$");
         productStateSeperator(product);
         binding.productCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +78,7 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 System.out.println("binding.btnFavoriteCircle clicked");
-                isFavorites(product);
+                addOrRemoveFavorite(product, position);
             }
         });
 
@@ -91,72 +86,74 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 System.out.println("binding.btnFavoriteHeart clicked");
-                isFavorites(product);
+                addOrRemoveFavorite(product, position);
 
             }
         });
     }
 
-    private void isFavorites(Product product) {
-        globalProductId = product.id;
-        try {
-            compositeDisposable.add(favoritesDao.getFavoritesIsExists(globalProductId)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::isExistsFavorite));
-        } catch (OnErrorNotImplementedException e) {
-            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
-        }
+    private void loadFavoriteItem(int currentPosition) {
+        compositeDisposable.add(Common.favoriteRepository.getFavItems()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<FavoriteOnDB>>() {
+                    @Override
+                    public void accept(List<FavoriteOnDB> favoriteOnDBS) throws Exception {
+                        drawFavoriteItems(currentPosition);
+                    }
+                }));
     }
 
-    private void isExistsFavorite(Integer result) {
-        globalFavorites.favoriteItemId = globalProductId;
-        if (result != 0) {
-            System.out.println("isExistsFavorite is exists");
-            deleteFavorite();
+
+    private void drawFavoriteItems(int position) {
+        if (Common.favoriteRepository.isFavorite(position) == 1) {
+            binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_full);
         } else {
-            System.out.println("isExistsFavorite is not exists");
-            addFavorite();
+            binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_empty);
         }
     }
 
-    private void addFavorite() {
-        try {
-            compositeDisposable.add(favoritesDao.insert(globalFavorites)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::addedFavorite));
-        } catch (OnErrorNotImplementedException e) {
-            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
+    private void addOrRemoveFavorite(ProductOnDB product, int position) {
+        if (Common.favoriteRepository.isFavorite(position) != 1) {
+            addToFavorite(product);
+        } else {
+            deleteToFavorite(product);
         }
     }
 
-    private void deleteFavorite() {
-        try {
-            compositeDisposable.add(favoritesDao.delete(globalFavorites)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::deletedFavorite));
-        } catch (OnErrorNotImplementedException e) {
-            System.out.println("OnErrorNotImplementedException e ->" + e.getLocalizedMessage());
-        }
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private void addedFavorite() {
-        System.out.println("added favorite item");
+    private void addToFavorite(ProductOnDB product) {
+        System.out.println("addToFavorite " + product);
         binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_full);
-        compositeDisposable.clear();
+        FavoriteOnDB favoriteOnDB = initializeFavoriteOnDb(product);
+        Common.favoriteRepository.insert(favoriteOnDB);
+//        productList.add(product);
+//        viewModel.getProductList().postValue(productList);
     }
 
-    private void deletedFavorite() {
-        System.out.println("deleted favorite item");
+    private void deleteToFavorite(ProductOnDB product) {
+        System.out.println("deleteToFavorite " + product);
         binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_empty);
-        compositeDisposable.clear();
+        FavoriteOnDB favoriteOnDB = initializeFavoriteOnDb(product);
+        Common.favoriteRepository.delete(favoriteOnDB);
+//        productList.add(product);
+//        viewModel.getProductList().postValue(productList);
+    }
+
+
+    private FavoriteOnDB initializeFavoriteOnDb(ProductOnDB product) {
+        System.out.println("initializeFavoriteOnDb product -> " + product);
+        FavoriteOnDB favoriteOnDB = new FavoriteOnDB();
+        favoriteOnDB.id = product.id;
+        favoriteOnDB.price = product.price;
+        favoriteOnDB.title = product.title;
+        favoriteOnDB.category = product.category;
+        favoriteOnDB.image = product.image;
+        favoriteOnDB.description = product.description;
+        return favoriteOnDB;
     }
 
     @SuppressLint("ResourceAsColor")
-    public void productStateSeperator(Product product) { //First 10 item (new item), other item randomly reduced (no new amount in not reduced)
+    public void productStateSeperator(ProductOnDB product) { //First 10 item (new item), other item randomly reduced (no new amount in not reduced)
         if (product.id <= 10) {
             binding.newProduct.setVisibility(View.VISIBLE);
             binding.reducedProduct.setVisibility(View.GONE);

@@ -1,18 +1,19 @@
-package com.cihatpala.capstoneproject.room.entity;
+package com.cihatpala.capstoneproject.database.modelDB;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class User {
+@Entity(tableName = "UserOnDB")
+public class UserOnDB {
     @PrimaryKey
     @NonNull
     public String token;
 
     @ColumnInfo(name = "user_name")
-    public String name;
+    public String userName;
 
     @NonNull
     public String getToken() {
@@ -24,19 +25,20 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 
-    public User(String token, String name) {
+    @Ignore
+    public UserOnDB(String token, String userName) {
         this.token = token;
-        this.name = name;
+        this.userName = userName;
     }
 
-    public User() {
+    public UserOnDB() {
 
     }
 
@@ -44,7 +46,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "token='" + token + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + userName + '\'' +
                 '}';
     }
+
 }
