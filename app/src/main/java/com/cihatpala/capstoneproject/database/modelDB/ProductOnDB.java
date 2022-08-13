@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "ProductOnDB")
-public class ProductOnDB {
+public class ProductOnDB implements Serializable {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "id")

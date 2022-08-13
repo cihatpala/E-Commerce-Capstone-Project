@@ -27,7 +27,6 @@ import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -66,6 +65,7 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
                 Intent detailIntent = new Intent(context, ProductDetailActivity.class);
                 ArrayList<String> images = imagesList(product.image);
                 detailIntent.putStringArrayListExtra("img", images);
+                detailIntent.putExtra("detailProduct", product);
                 Pair[] pairs = new Pair[1];
                 pairs[0] = Pair.create(binding.productImage, "image");
                 ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, pairs);
