@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cihatpala.capstoneproject.R;
+import com.cihatpala.capstoneproject.activities.MainActivity;
 import com.cihatpala.capstoneproject.adapter.ProductCardAdapter;
 import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.databinding.FragmentMainPageBinding;
@@ -37,12 +38,15 @@ public class MainPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_page, null, false);
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        viewModel.getProducts("", "");
+        if (MainActivity.productList.size() == 0) {
+            viewModel.getProducts("", "");
+        }
         viewModel.getProductList().observe(getViewLifecycleOwner(), this::processLiveData);
         return binding.getRoot();
     }
 
     private void processLiveData(List<ProductOnDB> products) {
+        System.out.println("processLiveData products size ->" + products.size());
         adapter = new ProductCardAdapter(products, getActivity());
         binding.rvMainPage.setLayoutManager(linearLayoutManager);
         binding.rvMainPage.setAdapter(adapter);

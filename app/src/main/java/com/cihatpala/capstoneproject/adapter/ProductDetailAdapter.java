@@ -31,7 +31,6 @@ public class ProductDetailAdapter extends RecyclerView.Adapter<ProductDetailHold
 
     @Override
     public void onBindViewHolder(@NonNull ProductDetailHolder holder, int position) {
-        System.out.println("position -> " + position);
         holder.bind(images.get(position), context);
     }
 

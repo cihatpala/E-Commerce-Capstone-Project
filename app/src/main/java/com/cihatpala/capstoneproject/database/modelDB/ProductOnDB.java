@@ -22,4 +22,15 @@ public class ProductOnDB {
     @ColumnInfo(name = "image")
     public String image;
 
+    @Override
+    public String toString() {
+        return "ProductOnDB{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

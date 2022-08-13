@@ -15,7 +15,6 @@ public class CategoryHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Category category) {
-        System.out.println("category name -> " + category.name);
         binding.tvCategoryName.setText(category.name);
     }
 }

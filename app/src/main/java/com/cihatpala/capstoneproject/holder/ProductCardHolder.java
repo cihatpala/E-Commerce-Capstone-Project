@@ -27,6 +27,7 @@ import com.cihatpala.capstoneproject.viewmodel.CommerceViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -55,8 +56,6 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
                 .into(binding.productImage);
         binding.productBrandName.setText(product.title);
         binding.productItemType.setText(product.category);
-        System.out.println("product.title bind -> " + product.title);
-        System.out.println("product.price bind -> " + product.price);
         double richPrice = parseDouble(product.price) + 10;
         String formattedPrice = doubleFormat(richPrice);
         binding.amountOld.setText(formattedPrice + "$");
@@ -77,7 +76,6 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
         binding.btnFavoriteCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("binding.btnFavoriteCircle clicked");
                 addOrRemoveFavorite(product, position);
             }
         });
@@ -85,7 +83,6 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
         binding.btnFavoriteHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("binding.btnFavoriteHeart clicked");
                 addOrRemoveFavorite(product, position);
 
             }
@@ -100,8 +97,10 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void accept(List<FavoriteOnDB> favoriteOnDBS) throws Exception {
                         drawFavoriteItems(currentPosition);
+                        compositeDisposable.clear();
                     }
                 }));
+
     }
 
 
@@ -122,26 +121,19 @@ public class ProductCardHolder extends RecyclerView.ViewHolder {
     }
 
     private void addToFavorite(ProductOnDB product) {
-        System.out.println("addToFavorite " + product);
         binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_full);
         FavoriteOnDB favoriteOnDB = initializeFavoriteOnDb(product);
         Common.favoriteRepository.insert(favoriteOnDB);
-//        productList.add(product);
-//        viewModel.getProductList().postValue(productList);
     }
 
     private void deleteToFavorite(ProductOnDB product) {
-        System.out.println("deleteToFavorite " + product);
         binding.btnFavoriteHeart.setBackgroundResource(R.drawable.ic_favorite_heart_empty);
         FavoriteOnDB favoriteOnDB = initializeFavoriteOnDb(product);
         Common.favoriteRepository.delete(favoriteOnDB);
-//        productList.add(product);
-//        viewModel.getProductList().postValue(productList);
     }
 
 
     private FavoriteOnDB initializeFavoriteOnDb(ProductOnDB product) {
-        System.out.println("initializeFavoriteOnDb product -> " + product);
         FavoriteOnDB favoriteOnDB = new FavoriteOnDB();
         favoriteOnDB.id = product.id;
         favoriteOnDB.price = product.price;

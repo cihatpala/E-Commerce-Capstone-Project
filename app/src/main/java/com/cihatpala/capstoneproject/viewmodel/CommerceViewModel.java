@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cihatpala.capstoneproject.activities.MainActivity;
+import com.cihatpala.capstoneproject.database.modelDB.FavoriteOnDB;
 import com.cihatpala.capstoneproject.database.modelDB.ProductOnDB;
 import com.cihatpala.capstoneproject.database.modelDB.UserOnDB;
 import com.cihatpala.capstoneproject.model.response.GetTokenResponse;
@@ -14,10 +15,13 @@ import com.cihatpala.capstoneproject.network.Services;
 import com.cihatpala.capstoneproject.utils.Common;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +29,7 @@ import retrofit2.Response;
 
 public class CommerceViewModel extends ViewModel {
     Services apiService;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public void setProductList(MutableLiveData<List<ProductOnDB>> productList) {
         this.productList = productList;
@@ -57,12 +62,23 @@ public class CommerceViewModel extends ViewModel {
 
                     @Override
                     public void onNext(List<ProductOnDB> products) {
-                        System.out.println("getProducts onComplete products -> " + products);
+                        System.out.println("getProducts products -> " + products);
                         addProductOnDb(products);
-                        for (int i = 0; i < products.size(); i++) {
-                            MainActivity.productList.add(fixProductData(products.get(i)));
-                            productList.postValue(MainActivity.productList);
-                        }
+                        compositeDisposable.add(Common.productRepository.getProductItems()
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<List<ProductOnDB>>() {
+                                    @Override
+                                    public void accept(List<ProductOnDB> productOnDBS) throws Exception {
+                                        System.out.println("accept productOnDBS size -> " + productOnDBS.size());
+                                        if (MainActivity.productList.size() != productOnDBS.size()) {
+                                            for (int i = 0; i < products.size(); i++) {
+                                                MainActivity.productList.add(fixProductData(products.get(i)));
+                                                productList.postValue(MainActivity.productList);
+                                            }
+                                        }
+                                    }
+                                }));
                     }
 
                     @Override
@@ -79,14 +95,12 @@ public class CommerceViewModel extends ViewModel {
     }
 
     public void getToken(String request, String name) {
-        System.out.println("request -> " + request.toString());
         apiService = BaseNetwork.getClient().create(Services.class);
         Call<GetTokenResponse> call = apiService.postLogin(request);
         call.enqueue(new Callback<GetTokenResponse>() {
             @Override
             public void onResponse(Call<GetTokenResponse> call, Response<GetTokenResponse> response) {
                 System.out.println("getToken onComplete response -> " + response);
-                System.out.println("getToken onComplete request.body -> " + response.body());
                 UserOnDB user = new UserOnDB();
                 if (response.body() != null) {
                     user.setToken(response.body().token);
@@ -99,7 +113,6 @@ public class CommerceViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<GetTokenResponse> call, Throwable t) {
-                System.out.println("getToken onFailure getLocalizedMessage -> " + t.getLocalizedMessage());
                 System.out.println("getToken onFailure getMessage-> " + t.getMessage());
             }
         });
@@ -117,7 +130,6 @@ public class CommerceViewModel extends ViewModel {
     }
 
     private void addProductOnDb(List<ProductOnDB> products) {
-        System.out.println("addProductOnDb product -> " + products);
         for (int i = 0; i < products.size(); i++) {
             ProductOnDB product = products.get(i);
             ProductOnDB productOnDB = new ProductOnDB();
@@ -127,7 +139,6 @@ public class CommerceViewModel extends ViewModel {
             productOnDB.category = product.category;
             productOnDB.description = product.description;
             productOnDB.image = product.image;
-            Common.productRepository.deleteToProduct(productOnDB);
             Common.productRepository.insertToProduct(productOnDB);
         }
     }
